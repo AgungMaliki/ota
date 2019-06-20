@@ -21,8 +21,11 @@ class Booking extends REST_Controller
         $redis = $this->redis->config();
         $data['data_ticket'] = $this->booking_model->get_ticket();
         
-        $set = $redis->set('data_ticket', json_encode($data));
         $get = $redis->get('data_ticket');
+        if(!isset($get)){
+            $set = $redis->set('data_ticket', json_encode($data));
+            $get = $redis->get('data_ticket');
+        }
 
         $this->load->view('ticket/list', json_decode($get));
     }
@@ -32,8 +35,12 @@ class Booking extends REST_Controller
         $redis = $this->redis->config();
         $data['detail'] = $this->booking_model->get_ticket_id($id);
 
-        $set = $redis->set('data_ticket_id', json_encode($data));
         $get = $redis->get('data_ticket_id');
+
+        if(!isset($get)){
+            $set = $redis->set('data_ticket_id', json_encode($data));
+            $get = $redis->get('data_ticket_id');
+        }
 
         $this->load->view('ticket/book',json_decode($get));
     }
