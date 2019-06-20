@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Welcome to CodeIgniter</title>
+	<!-- Bootstrap core CSS-->
+    <link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.css"); ?>" />
+
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4">
+			<h2 class="page_header">Welcome To CodeIgniter</h2>
+			<?php echo form_open('booking/booked');?>
+				<div class="form-group">
+					<label>Fullname</label><br>
+					<input type="text" name="name" class="form-control" placeholder="Nama Lengkap">
+					<label>Date of birth</label><br>
+					<textarea type="text" name="dob" class="form-control" cols="40" rows="5" placeholder="Alamat"></textarea>
+					<label>Email</label><br>
+					<input type="text" name="email" class="form-control" placeholder="Tempat Lahir">
+					<label>Tanggal Lahir</label><br>
+					<input type = "hidden" name = "id" value = "<?php echo $detail[0]->id; ?>" /> 
+					<button class="btn btn-danger" type="submit">Simpan</button>
+				</div>	
+			<?php echo form_close();?>
+		</div>	
+	</div>
+</div>
+</body>
+</html>
