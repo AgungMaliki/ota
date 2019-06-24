@@ -16,6 +16,33 @@ class Booking extends REST_Controller
         $this->load->library('redis');
     }
 
+    public function testing($param)
+    {
+        $host = 'spider-01.rmq.cloudamqp.com';
+        $user = 'xgcgrirt';
+        $pass = 'WwPbKECk3j9vyZRc8Zvxxe8je75NISXU';
+        $vhost = 'xgcgrirt';
+        $port = '5672';
+        $exchange = 'notification';
+        $queue = 'testing_ota';
+
+
+        $connection = new AMQPStreamConnection($host, $port, $user, $pass, $vhost);
+        $channel = $connection->channel();
+        $channel->queue_declare($queue, false, true, false, false);
+      
+        $channel->exchange_declare($exchange, AMQPExchangeType::DIRECT, false, true, false);
+        $channel->queue_bind($queue, $exchange);
+        $messageBody = json_encode([
+			'email' => $param['to'],
+			'subscribed' => true
+		]);
+        $message = new AMQPMessage($messageBody, array('content_type' => 'application/json', 'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT));
+        $channel->basic_publish($message, $exchange);
+        $channel->close();
+        $connection->close();
+    }
+
     public function index_get()
     {
         $redis = $this->redis->config();
@@ -61,7 +88,8 @@ class Booking extends REST_Controller
         $this->email->message($param['message']);
 
         if($this->email->send()) {
-            // queue here
+            $x['email'] = $param['to'];
+            $this->testing($x);
         }
         else {
             echo 'Email tidak berhasil dikirim';

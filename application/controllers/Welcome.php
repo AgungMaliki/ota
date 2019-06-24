@@ -52,7 +52,7 @@ class Welcome extends CI_Controller {
         $pass = 'WwPbKECk3j9vyZRc8Zvxxe8je75NISXU';
         $vhost = 'xgcgrirt';
         $port = '5672';
-        $exchange = 'subsribers';
+        $exchange = 'notification';
         $queue = 'testing_ota';
 
 
