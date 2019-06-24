@@ -11,15 +11,23 @@
 
 <?php echo form_open('booking/booked');?>
 
-<table>
-    <tr><td>Fullname</td><td><?php echo form_input('name');?></td></tr>
-    <tr><td>Date of birth</td><td><?php echo form_input('dob');?></td></tr> 
-    <tr><td>Email</td><td><?php echo form_input('email');?></td></tr>       
-    <tr><td colspan="2">
-    <input type = "hidden" name = "id" value = "<?php echo $detail[0]->id; ?>" /> 
-        <?php echo form_submit('submit','Book');?>
-        </td></tr>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="card" style="margin:0 auto;">
+            <div class="card-body">
+                <table>
+                    <tr><td>Fullname</td><td><?php echo form_input('name');?></td></tr>
+                    <tr><td>Date of birth</td><td><?php echo form_input('dob');?></td></tr> 
+                    <tr><td>Email</td><td><?php echo form_input('email');?></td></tr>       
+                    <tr><td colspan="2">
+                    <input type = "hidden" name = "id" value = "<?php echo $detail[0]->id; ?>" /> 
+                        <?php echo form_submit('submit','Book');?>
+                        </td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php 
 
