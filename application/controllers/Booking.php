@@ -35,7 +35,7 @@ class Booking extends REST_Controller
         $channel->queue_bind($queue, $exchange);
         $messageBody = json_encode([
 			'email' => $param['to'],
-			'subscribed' => true
+			'sending' => true
 		]);
         $message = new AMQPMessage($messageBody, array('content_type' => 'application/json', 'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT));
         $channel->basic_publish($message, $exchange);
