@@ -9,29 +9,25 @@
 </head>
 <body>
 
-<?php echo form_open('booking/booked');?>
-
-<div class="container">
-    <div class="row">
-        <div class="card" style="margin:0 auto;">
-            <div class="card-body">
-                <table>
-                    <tr><td>Fullname</td><td><?php echo form_input('name');?></td></tr>
-                    <tr><td>Date of birth</td><td><?php echo form_input('dob');?></td></tr> 
-                    <tr><td>Email</td><td><?php echo form_input('email');?></td></tr>       
-                    <tr><td colspan="2">
-                    <input type = "hidden" name = "id" value = "<?php echo $detail[0]->id; ?>" /> 
-                        <?php echo form_submit('submit','Book');?>
-                        </td></tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php 
-
-    echo form_close();
-
-?>
+<form action="<?php echo base_url(). 'booking/booked'; ?>" method="post">
+		<table style="margin:20px auto;">
+			<tr>
+				<td>Fullname</td>
+				<td><input type="text" name="name"></td>
+			</tr>
+			<tr>
+				<td>Date of birth</td>
+				<td><input type="text" name="dob"></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="text" name="email"></td>
+			</tr>
+			<tr>
+				<td></td>
+                <input type = "hidden" name = "id" value = "<?php echo $detail[0]->id; ?>" />
+				<td><input type="submit" value="Tambah"></td>
+			</tr>
+		</table>
+	</form>	
 </body>

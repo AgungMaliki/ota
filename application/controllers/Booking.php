@@ -35,12 +35,10 @@ class Booking extends REST_Controller
         $redis = $this->redis->config();
         $data['detail'] = $this->booking_model->get_ticket_id($id);
 
+       
+        $set = $redis->set('data_ticket_id', json_encode($data));
         $get = $redis->get('data_ticket_id');
 
-        if(!isset($get)){
-            $set = $redis->set('data_ticket_id', json_encode($data));
-            $get = $redis->get('data_ticket_id');
-        }
 
         $this->load->view('ticket/book',json_decode($get));
     }
@@ -74,8 +72,6 @@ class Booking extends REST_Controller
 
     public function booked_post()
     {
-        if(isset($_POST['submit'])){
-            
             $dt = date('Y-m-d H:i:s');
             $id = 'USR' . strtotime($dt);
 
@@ -84,9 +80,6 @@ class Booking extends REST_Controller
             $data['email'] = $this->input->post('email');
             $data['created_datetime'] = date("Y-m-d H:i:s");
             $data['updated_datetime'] = date("Y-m-d H:i:s");
-
-            // print_r($data);
-            // die();
 
             $store = $this->booking_model->insert_ticket($data);
             if($store>0)
@@ -116,6 +109,5 @@ class Booking extends REST_Controller
                     }
                 }
             }
-        }
     }
 }
